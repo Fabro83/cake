@@ -33,7 +33,7 @@ class IteTypesTable extends Table
         parent::initialize($config);
 
         $this->setTable('ite_types');
-        $this->setDisplayField('id');
+        $this->setDisplayField('value');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('IteClasses', [

@@ -39,7 +39,7 @@ class IteItemsController extends AppController
     public function view($id = null)
     {
         $iteItem = $this->IteItems->get($id, [
-            'contain' => ['Files', 'IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']
+            'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']
         ]);
 
         $this->set('iteItem', $iteItem);
@@ -63,13 +63,13 @@ class IteItemsController extends AppController
             }
             $this->Flash->error(__('The ite item could not be saved. Please, try again.'));
         }
-        $files = $this->IteItems->Files->find('list', ['limit' => 200]);
+        // $files = $this->IteItems->Files->find('list', ['limit' => 200]);
         $iteBudgets = $this->IteItems->IteBudgets->find('list', ['limit' => 200]);
         $iteAcquisitionTypes = $this->IteItems->IteAcquisitionTypes->find('list', ['limit' => 200]);
         $iteStatuses = $this->IteItems->IteStatuses->find('list', ['limit' => 200]);
         $iteClasses = $this->IteItems->IteClasses->find('list', ['limit' => 200]);
         $iteTypes = $this->IteItems->IteTypes->find('list', ['limit' => 200]);
-        $this->set(compact('iteItem', 'files', 'sectors', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
+        $this->set(compact('iteItem', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
         $this->set('_serialize', ['iteItem']);
     }
 
@@ -94,13 +94,13 @@ class IteItemsController extends AppController
             }
             $this->Flash->error(__('The ite item could not be saved. Please, try again.'));
         }
-        $files = $this->IteItems->Files->find('list', ['limit' => 200]);
+        // $files = $this->IteItems->Files->find('list', ['limit' => 200]);
         $iteBudgets = $this->IteItems->IteBudgets->find('list', ['limit' => 200]);
         $iteAcquisitionTypes = $this->IteItems->IteAcquisitionTypes->find('list', ['limit' => 200]);
         $iteStatuses = $this->IteItems->IteStatuses->find('list', ['limit' => 200]);
         $iteClasses = $this->IteItems->IteClasses->find('list', ['limit' => 200]);
         $iteTypes = $this->IteItems->IteTypes->find('list', ['limit' => 200]);
-        $this->set(compact('iteItem', 'files', 'sectors', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
+        $this->set(compact('iteItem', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
         $this->set('_serialize', ['iteItem']);
     }
 

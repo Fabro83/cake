@@ -31,7 +31,7 @@ class IteClassesTable extends Table
         parent::initialize($config);
 
         $this->setTable('ite_classes');
-        $this->setDisplayField('id');
+        $this->setDisplayField('value');
         $this->setPrimaryKey('id');
     }
 

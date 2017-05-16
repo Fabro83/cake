@@ -25,4 +25,5 @@ class IteBudget extends Entity
         '*' => true,
         'id' => false
     ];
+
 }

@@ -31,7 +31,7 @@ class IteBudgetsTable extends Table
         parent::initialize($config);
 
         $this->setTable('ite_budgets');
-        $this->setDisplayField('id');
+        $this->setDisplayField('value');
         $this->setPrimaryKey('id');
     }
 

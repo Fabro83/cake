@@ -24,7 +24,8 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+
+                <th scope="col"><?= $this->Paginator->sort('picture') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('file_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('decree') ?></th>
@@ -41,17 +42,17 @@
         <tbody>
             <?php foreach ($iteItems as $iteItem): ?>
             <tr>
-                <td><?= $this->Number->format($iteItem->id) ?></td>
+                <td><?= $this->Html->image($iteItem->picture)  ?></td>                
                 <td><?= $this->Number->format($iteItem->file_id) ?></td>
                 <td><?= $this->Number->format($iteItem->year) ?></td>
                 <td><?= $this->Number->format($iteItem->decree) ?></td>
                 <td><?= $this->Number->format($iteItem->price) ?></td>
                 <td><?= $this->Number->format($iteItem->sector_id) ?></td>
-                <td><?= $iteItem->has('ite_budget') ? $this->Html->link($iteItem->ite_budget->value, ['controller' => 'IteBudgets', 'action' => 'view', $iteItem->ite_budget->value]) : '' ?></td>
+                <td><?= $iteItem->has('ite_budget') ? $this->Html->link($iteItem->ite_budget->value, ['controller' => 'IteBudgets', 'action' => 'edit', $iteItem->ite_budget->id]) : '' ?></td>
                 <td><?= $iteItem->has('ite_acquisition_type') ? $this->Html->link($iteItem->ite_acquisition_type->value, ['controller' => 'IteAcquisitionTypes', 'action' => 'view', $iteItem->ite_acquisition_type->value]) : '' ?></td>
-                <td><?= $iteItem->has('ite_status') ? $this->Html->link($iteItem->ite_status->value, ['controller' => 'IteStatuses', 'action' => 'view', $iteItem->ite_status->value]) : '' ?></td>
-                <td><?= $iteItem->has('ite_class') ? $this->Html->link($iteItem->ite_class->value, ['controller' => 'IteClasses', 'action' => 'view', $iteItem->ite_class->value]) : '' ?></td>
-                <td><?= $iteItem->has('ite_type') ? $this->Html->link($iteItem->ite_type->value, ['controller' => 'IteTypes', 'action' => 'view', $iteItem->ite_type->value]) : '' ?></td>
+                <td><?= $iteItem->has('ite_status') ? $this->Html->link($iteItem->ite_status->value, ['controller' => 'IteStatuses', 'action' => 'view', $iteItem->ite_status->id]) : '' ?></td>
+                <td><?= $iteItem->has('ite_class') ? $this->Html->link($iteItem->ite_class->value, ['controller' => 'IteClasses', 'action' => 'view', $iteItem->ite_class->id]) : '' ?></td>
+                <td><?= $iteItem->has('ite_type') ? $this->Html->link($iteItem->ite_type->value, ['controller' => 'IteTypes', 'action' => 'view', $iteItem->ite_type->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $iteItem->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $iteItem->id]) ?>

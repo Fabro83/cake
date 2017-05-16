@@ -31,8 +31,8 @@
             echo $this->Form->control('price');
             echo $this->Form->control('picture');
             echo $this->Form->control('sector_id');
-            echo $this->Form->control('budget_id', ['options' => $iteBudgets, 'empty' => true]);
-            echo $this->Form->control('acquisition_type_id', ['options' => $iteAcquisitionTypes, 'empty' => true]);
+            echo $this->Form->control('budget_id', ['options' => $iteBudgets]);
+            echo $this->Form->control('acquisition_type_id', ['options' => $iteAcquisitionTypes]);
             echo $this->Form->control('status_id', ['options' => $iteStatuses]);
             echo $this->Form->control('item_class_id', ['options' => $iteClasses]);
             echo $this->Form->control('item_type_id', ['options' => $iteTypes]);

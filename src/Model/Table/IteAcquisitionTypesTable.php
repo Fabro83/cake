@@ -31,7 +31,7 @@ class IteAcquisitionTypesTable extends Table
         parent::initialize($config);
 
         $this->setTable('ite_acquisition_types');
-        $this->setDisplayField('id');
+        $this->setDisplayField('value');
         $this->setPrimaryKey('id');
     }
 
