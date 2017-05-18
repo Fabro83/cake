@@ -3,28 +3,20 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Ite Item'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Budgets'), ['controller' => 'IteBudgets', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Budget'), ['controller' => 'IteBudgets', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Acquisition Types'), ['controller' => 'IteAcquisitionTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Acquisition Type'), ['controller' => 'IteAcquisitionTypes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Statuses'), ['controller' => 'IteStatuses', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Status'), ['controller' => 'IteStatuses', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Classes'), ['controller' => 'IteClasses', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Class'), ['controller' => 'IteClasses', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Types'), ['controller' => 'IteTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Type'), ['controller' => 'IteTypes', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="iteItems index large-9 medium-8 columns content">
-    <h3><?= __('Ite Items') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+
+<!-- <div class="iteItems index large-9 medium-8 columns content"> -->
+<div class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Hover Data Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="example2" class="table table-bordered table-hover">
         <thead>
             <tr>
-
                 <th scope="col"><?= $this->Paginator->sort('picture') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('file_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('year') ?></th>
@@ -42,7 +34,7 @@
         <tbody>
             <?php foreach ($iteItems as $iteItem): ?>
             <tr>
-                <td><?= $this->Html->image($iteItem->picture)  ?></td>                
+                <td><?= $this->Html->image($iteItem->picture)  ?></td>
                 <td><?= $this->Number->format($iteItem->file_id) ?></td>
                 <td><?= $this->Number->format($iteItem->year) ?></td>
                 <td><?= $this->Number->format($iteItem->decree) ?></td>
@@ -60,8 +52,43 @@
                 </td>
             </tr>
             <?php endforeach; ?>
-        </tbody>
-    </table>
+          </tfoot>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+  <?php
+  $this->Html->css([
+  'AdminLTE./plugins/datatables/dataTables.bootstrap',
+  ],
+  ['block' => 'css']);
+
+  $this->Html->script([
+  'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+  ],
+  ['block' => 'script']);
+  ?>
+
+  <script>
+  $(function () {
+  $("#example1").DataTable();
+  $('#example2').DataTable({
+  "paging": true,
+  "lengthChange": false,
+  "searching": false,
+  "ordering": true,
+  "info": true,
+  "autoWidth": false
+  });
+  });
+  </script>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
