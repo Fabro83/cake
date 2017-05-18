@@ -10,15 +10,15 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Hover Data Table</h3>
+          <!-- <h3 class="box-title">Hover Data Table</h3> -->
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="example2" class="table table-bordered table-hover">
+          <table id="itemTable" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('picture') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('file_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('N° Expediente') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('decree') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('price') ?></th>
@@ -79,7 +79,7 @@
   <script>
   $(function () {
   $("#example1").DataTable();
-  $('#example2').DataTable({
+  $('#itemTable').DataTable({
   "paging": true,
   "lengthChange": false,
   "searching": false,
@@ -91,12 +91,12 @@
   </script>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('primero')) ?>
+            <?= $this->Paginator->prev('< ' . __('anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('último') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de un total de {{count}}')]) ?></p>
     </div>
 </div>
