@@ -22,7 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('decree') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('price') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sector_id') ?></th>
+                <th scope="col"><?php //$this->Paginator->sort('sector_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('budget_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('acquisition_type_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status_id') ?></th>
@@ -39,7 +39,7 @@
                 <td><?= $this->Number->format($iteItem->year) ?></td>
                 <td><?= $this->Number->format($iteItem->decree) ?></td>
                 <td><?= $this->Number->format($iteItem->price) ?></td>
-                <td><?= $this->Number->format($iteItem->sector_id) ?></td>
+                <td><?php //$this->Number->format($iteItem->sector_id) ?></td>
                 <td><?= $iteItem->has('ite_budget') ? $this->Html->link($iteItem->ite_budget->value, ['controller' => 'IteBudgets', 'action' => 'edit', $iteItem->ite_budget->id]) : '' ?></td>
                 <td><?= $iteItem->has('ite_acquisition_type') ? $this->Html->link($iteItem->ite_acquisition_type->value, ['controller' => 'IteAcquisitionTypes', 'action' => 'view', $iteItem->ite_acquisition_type->value]) : '' ?></td>
                 <td><?= $iteItem->has('ite_status') ? $this->Html->link($iteItem->ite_status->value, ['controller' => 'IteStatuses', 'action' => 'view', $iteItem->ite_status->id]) : '' ?></td>
@@ -48,7 +48,7 @@
                 <td class="actions">
                     <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span>', array('action' => 'view', $iteItem->id), array('title' => 'Ver', 'escape' => false)); ?>
                     <?= $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $iteItem->id), array('title' => 'Editar', 'escape' => false)); ?>
-                    <?= $this->Form->postLink('<span class="glyphicons glyphicons-delete"></span>', ['action' => 'delete', $iteItem->id], ['confirm' => __('Are you sure you want to delete # {0}?', $iteItem->id)]) ?>
+                    <?= $this->Form->postLink('<span class="glyphicon glyphicon-trash"></span>', ['action' => 'delete', $iteItem->id], array('title' => 'eliminar', 'escape' => false,['confirm' => __('Quiere eliminarlo # {0}?', $iteItem->id)])) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
