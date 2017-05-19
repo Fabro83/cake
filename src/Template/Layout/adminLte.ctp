@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <?php echo $this->Html->css('AdminLTE.AdminLTE.min'); ?>
+    <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <?php echo $this->Html->css('AdminLTE.skins/skin-blue'); ?>
@@ -27,7 +28,7 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" ng-app="mainApp">
     <!-- Site wrapper -->
     <div class="wrapper">
         <header class="main-header">
