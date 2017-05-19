@@ -3,7 +3,6 @@
   * @var \App\View\AppView $this
   */
 ?>
-
 <!-- <div class="iteItems index large-9 medium-8 columns content"> -->
 <div class="content">
   <div class="row">
@@ -15,6 +14,7 @@
         <!-- /.box-header -->
         <div class="box-body">
           <table id="itemTable" class="table table-bordered table-hover">
+          <table id="example1_wrapper" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('picture') ?></th>
@@ -46,9 +46,9 @@
                 <td><?= $iteItem->has('ite_class') ? $this->Html->link($iteItem->ite_class->value, ['controller' => 'IteClasses', 'action' => 'view', $iteItem->ite_class->id]) : '' ?></td>
                 <td><?= $iteItem->has('ite_type') ? $this->Html->link($iteItem->ite_type->value, ['controller' => 'IteTypes', 'action' => 'view', $iteItem->ite_type->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $iteItem->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $iteItem->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $iteItem->id], ['confirm' => __('Are you sure you want to delete # {0}?', $iteItem->id)]) ?>
+                    <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span>', array('action' => 'view', $iteItem->id), array('title' => 'Ver', 'escape' => false)); ?>
+                    <?= $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $iteItem->id), array('title' => 'Editar', 'escape' => false)); ?>
+                    <?= $this->Form->postLink('<span class="glyphicons glyphicons-delete"></span>', ['action' => 'delete', $iteItem->id], ['confirm' => __('Are you sure you want to delete # {0}?', $iteItem->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

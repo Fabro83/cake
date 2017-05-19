@@ -1115,7 +1115,10 @@ figure {
 }
 img {
   vertical-align: middle;
-  width: 100%;  
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
 }
 .img-responsive,
 .thumbnail > img,
