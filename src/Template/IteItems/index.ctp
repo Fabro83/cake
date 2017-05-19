@@ -9,12 +9,11 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <!-- <h3 class="box-title">Hover Data Table</h3> -->
+          <h3 class="box-title">Listado de items</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="itemTable" class="table table-bordered table-hover">
-          <table id="example1_wrapper" class="table table-bordered table-hover">
+          <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('picture') ?></th>
@@ -79,14 +78,6 @@
   <script>
   $(function () {
   $("#example1").DataTable();
-  $('#itemTable').DataTable({
-  "paging": true,
-  "lengthChange": false,
-  "searching": false,
-  "ordering": true,
-  "info": true,
-  "autoWidth": false
-  });
   });
   </script>
     <div class="paginator">
