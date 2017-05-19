@@ -9,27 +9,13 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Listado de items</h3>
+          <!-- <h3 class="box-title">Listado de items</h3> -->
         </div>
         <!-- /.box-header -->
         <div class="box-body">
           <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
-<<<<<<< Updated upstream
-                <th scope="col"><?= $this->Paginator->sort('picture') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('N° Expediente') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('year') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('decree') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('price') ?></th>
-                <th scope="col"><?php //$this->Paginator->sort('sector_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('budget_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('acquisition_type_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('status_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('item_class_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('item_type_id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-=======
                 <th scope="col"><?= $this->Paginator->sort('picture', array('label'=>'Imagen')) ?></th>
                 <th scope="col"><?= $this->Paginator->sort('file_id', array('label'=>'N° Expediente')) ?></th>
                 <th scope="col"><?= $this->Paginator->sort('year', array('label'=>'Año')) ?></th>
@@ -42,7 +28,6 @@
                 <th scope="col"><?= $this->Paginator->sort('item_class_id', array('label'=>'Clase')) ?></th>
                 <th scope="col"><?= $this->Paginator->sort('item_type_id', array('label'=>'Tipo de Item')) ?></th>
                 <th scope="col" class="actions"><?= __('') ?></th>
->>>>>>> Stashed changes
             </tr>
         </thead>
         <tbody>
