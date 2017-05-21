@@ -17,6 +17,8 @@
     <?php echo $this->Html->script('AdminLTE./datatables/dataTables.bootstrap'); ?>
     <?php echo $this->Html->css('AdminLTE./datatables/dataTables.bootstrap'); ?>
 
+    <?php //echo $this->Html->script('AdminLTE./datepicker/bootstrap-datepicker'); ?>
+    <?php //echo $this->Html->css('AdminLTE./datepicker/datepicker3'); ?>
 
     <?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
     <?php //echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>

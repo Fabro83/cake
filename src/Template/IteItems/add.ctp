@@ -3,29 +3,29 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Ite Items'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Budgets'), ['controller' => 'IteBudgets', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Budget'), ['controller' => 'IteBudgets', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Acquisition Types'), ['controller' => 'IteAcquisitionTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Acquisition Type'), ['controller' => 'IteAcquisitionTypes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Statuses'), ['controller' => 'IteStatuses', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Status'), ['controller' => 'IteStatuses', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Classes'), ['controller' => 'IteClasses', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Class'), ['controller' => 'IteClasses', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ite Types'), ['controller' => 'IteTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Ite Type'), ['controller' => 'IteTypes', 'action' => 'add']) ?></li>
+        <li class="heading"><?php// __('Actions') ?></li>
+        <li><?php //$this->Html->link(__('List Ite Items'), ['action' => 'index']) ?></li>
+        <li><?php //$this->Html->link(__('List Ite Budgets'), ['controller' => 'IteBudgets', 'action' => 'index']) ?></li>
+        <li><?php //$this->Html->link(__('New Ite Budget'), ['controller' => 'IteBudgets', 'action' => 'add']) ?></li>
+        <li><?php //$this->Html->link(__('List Ite Acquisition Types'), ['controller' => 'IteAcquisitionTypes', 'action' => 'index']) ?></li>
+        <li><?php //$this->Html->link(__('New Ite Acquisition Type'), ['controller' => 'IteAcquisitionTypes', 'action' => 'add']) ?></li>
+        <li><?php //$this->Html->link(__('List Ite Statuses'), ['controller' => 'IteStatuses', 'action' => 'index']) ?></li>
+        <li><?php //$this->Html->link(__('New Ite Status'), ['controller' => 'IteStatuses', 'action' => 'add']) ?></li>
+        <li><?php //$this->Html->link(__('List Ite Classes'), ['controller' => 'IteClasses', 'action' => 'index']) ?></li>
+        <li><?php //$this->Html->link(__('New Ite Class'), ['controller' => 'IteClasses', 'action' => 'add']) ?></li>
+        <li><?php //$this->Html->link(__('List Ite Types'), ['controller' => 'IteTypes', 'action' => 'index']) ?></li>
+        <li><?php //$this->Html->link(__('New Ite Type'), ['controller' => 'IteTypes', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="iteItems form large-9 medium-8 columns content">
     <?= $this->Form->create($iteItem) ?>
     <fieldset>
         <legend><?= __('Add Ite Item') ?></legend>
         <?php
             echo $this->Form->control('file_id');
-            echo $this->Form->control('year');
+            echo $this->Form->control('year', array('name'=>'fecha','type'=>'date','label'=>'Año'));
             echo $this->Form->control('decree');
             echo $this->Form->control('comment');
             echo $this->Form->control('price');
@@ -41,3 +41,13 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+<script type="text/javascript">
+    $("#fecha").datepicker({
+        format: "dd/mm/yyyy",
+        language: "es"
+    });
+    //
+    // $(".clockpicker").clockpicker({
+    //     autoclose: true
+    // });
+</script>
