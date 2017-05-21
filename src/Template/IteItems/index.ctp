@@ -51,7 +51,7 @@
                 </td>
             </tr>
             <?php endforeach; ?>
-          </tfoot>
+          </tbody>
         </table>
       </div>
       <!-- /.box-body -->
@@ -61,19 +61,8 @@
   <!-- /.col -->
   </div>
   <!-- /.row -->
+</div>
 
-  <?php
-  $this->Html->css([
-  'AdminLTE./plugins/datatables/dataTables.bootstrap',
-  ],
-  ['block' => 'css']);
-
-  $this->Html->script([
-  'AdminLTE./plugins/datatables/jquery.dataTables.min',
-  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-  ],
-  ['block' => 'script']);
-  ?>
 
   <script>
   $(function () {
@@ -90,4 +79,3 @@
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de un total de {{count}}')]) ?></p>
     </div>
-</div>
