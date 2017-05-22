@@ -3,6 +3,19 @@
   * @var \App\View\AppView $this
   */
 ?>
+<style>
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+.kv-avatar .file-input {
+    display: table-cell;
+    max-width: 220px;
+}
+</style>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?php// __('Actions') ?></li>
@@ -25,11 +38,26 @@
         <legend><?= __('Add Ite Item') ?></legend>
         <?php
             echo $this->Form->control('file_id');
-            echo $this->Form->control('year', array('name'=>'fecha','type'=>'date','label'=>'Año'));
-            echo $this->Form->control('decree');
+            //  echo $this->Form->control('year', array('type'=>'text','label'=>'Año')); ?>
+            <div class="form-group">
+              <label>Fecha:</label>
+
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="year">
+              </div>
+              <!-- /.input group -->
+            </div>
+          <?php echo $this->Form->control('decree');
             echo $this->Form->control('comment');
-            echo $this->Form->control('price');
-            echo $this->Form->control('picture');
+            echo $this->Form->control('price'); ?>
+            <div class="form-group">
+              <h3>Busque una imagen</h3>
+              <input id="picture" type="file" class="file">
+            </div>
+            <?php //echo $this->Form->control('picture');
             echo $this->Form->control('sector_id');
             echo $this->Form->control('budget_id', ['options' => $iteBudgets]);
             echo $this->Form->control('acquisition_type_id', ['options' => $iteAcquisitionTypes]);
@@ -42,12 +70,45 @@
     <?= $this->Form->end() ?>
 </div>
 <script type="text/javascript">
-    $("#fecha").datepicker({
-        format: "dd/mm/yyyy",
-        language: "es"
+  // $("#picture").fileinput({
+  //   showCaption: false,
+  //   browseClass: "btn btn-primary btn-sm",
+  //   fileType: "any"
+  // });
+</script>
+<script type="text/javascript">
+debugger;
+$("#picture").fileinput({
+uploadUrl: "upload.php",
+  uploadAsync: false,
+showUpload: false,
+showRemove: false,
+initialPreview: [
+<?php foreach($images as $image){?>
+  "<img src='<?php echo $image; ?>' height='120px' class='file-preview-image'>",
+<?php } ?>],
+  initialPreviewConfig: [<?php foreach($images as $image){ $infoImagenes=explode("/",$image);?>
+{caption: "<?php echo $infoImagenes[1];?>",  height: "120px", url: "borrar.php", key:"<?php echo $infoImagenes[1];?>"},
+<?php } ?>]
+}).on("filebatchselected", function(event, files) {
+
+$("#archivos").fileinput("upload");
+
+});
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#year').datepicker({
+          format: "dd/mm/yyyy",
+          language: "es",
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down"
+            },
+            autoclose: true
+        });
     });
-    //
-    // $(".clockpicker").clockpicker({
-    //     autoclose: true
-    // });
+     $("#input-4").fileinput({showCaption: false});
 </script>
