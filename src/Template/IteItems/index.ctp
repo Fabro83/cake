@@ -16,7 +16,8 @@
         <!-- /.box-header -->
         <div class="box-body">
           <!-- <table id="example1" class="table table-bordered table-striped"> -->
-          <table ng-table="vm.tableParams" class="table" show-filter="true">
+          <table ng-table="demo.tableParams" class="table" show-filter="true">
+            <!-- http://ng-table.com/#/editing/demo-inline SEGUIR VIENDO LA PAGINA-->
               <tr ng-repeat="a in item">
                   <td title="'Picture'" filter="{ picture: 'text'}" sortable="'picture'">
                       {{a.picture}}</td>
@@ -46,7 +47,7 @@ mainApp.controller('getInd', function($scope,$http){
       method: 'get',
       url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getIndexClass')) ?>" + '/' + '1'
       }).then(function (response) {
-          debugger;
+          // debugger;
           $scope.item2 = response.data;
         console.log(response.data);
       },function (error){
