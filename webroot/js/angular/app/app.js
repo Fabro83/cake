@@ -1,5 +1,5 @@
-var mainApp = angular.module("mainApp", ['ngRoute']);
-mainApp.config(function($routeProvider) {
+var mainApp = angular.module("mainApp", ['ngRoute','ngTable']);
+ mainApp.config(function($routeProvider) {
     // $routeProvider
     //     .when('/login', {
     //         templateUrl: 'users/login',
@@ -10,8 +10,8 @@ mainApp.config(function($routeProvider) {
 		// //controller: 'StudentController'
 		// })
 		// .when('/registration', {
-		// templateUrl: 'users/registration',
-		// //controller: 'StudentController'
+		// // templateUrl: 'users/registration',
+		// controller: 'getInd'
 		// })
 		// .when('/', {
 		// templateUrl: 'users/index',
@@ -20,4 +20,23 @@ mainApp.config(function($routeProvider) {
     // /*     .otherwise({
     //         redirectTo: '/'
     //     }) */;
-});
+}
+);
+
+mainApp.controller('getInd', function($scope,$http){
+
+    // $scope.item = <?php echo json_encode($iteItems) ?>;
+
+    $scope.getItems = function() {
+
+      $http
+      // .get("<?php// echo Router::url(array('controller' => 'ItemItems', 'action' => 'getIndexClass')) ?>" + '/' + 1)
+       .get('http://localhost:8081/cake/ite-items/getIndexClass/1')
+       .then(function(response) {
+     $scope.item2 = response;
+     console.log($scope.item2);
+ });
+
+
+    };
+  });

@@ -29,6 +29,8 @@
     <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
     <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
 
+    <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
     <!-- Ionicons -->
     <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
     <!-- Theme style -->

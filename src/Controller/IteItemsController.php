@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Routing\Router;
 
 /**
  * IteItems Controller
@@ -27,6 +28,24 @@ class IteItemsController extends AppController
 
         $this->set(compact('iteItems'));
         $this->set('_serialize', ['iteItems']);
+    }
+
+    public function getIndexClass($id)
+    {
+          $this->autoRender = false;
+          $iteItems = $this->paginate($this->IteItems->find('all', array(
+          'conditions' => ['IteItems.item_class_id' => $id],
+          'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes'])));
+// pr($iteItems);
+// $this->set('iteItems', $iteItems);
+ $a = json_encode($iteItems);
+$this->set(array(
+        'data' => $a,
+         '_serialize' => array('data')
+    ));
+        // $this->set(compact('iteItems'));
+        // $this->set('_serialize', ['iteItems']);
+
     }
 
     /**

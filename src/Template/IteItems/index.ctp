@@ -4,8 +4,8 @@
   */
 ?>
 <!-- <div class="iteItems index large-9 medium-8 columns content"> -->
-<div class="content">
-  <div class="row">
+<div class="content" data-ng-controller="getInd">
+  <div class="row" ng-init="getItems()">
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
@@ -13,45 +13,14 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('picture', array('label'=>'Imagen')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('file_id', array('label'=>'N° Expediente')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('year', array('label'=>'Año')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('decree', array('label'=>'Decreto')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('price', array('label'=>'Precio')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sector_id', array('label'=>'Sector')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('budget_id', array('label'=>'Partida')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('acquisition_type_id', array('label'=>'Tipo Adquisición')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('status_id', array('label'=>'Estado')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('item_class_id', array('label'=>'Clase')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('item_type_id', array('label'=>'Tipo de Item')) ?></th>
-                <th scope="col" class="actions"><?= __('') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($iteItems as $iteItem): ?>
-            <tr>
-                <td><?= $this->Html->image($iteItem->picture)  ?></td>
-                <td><?= $this->Number->format($iteItem->file_id) ?></td>
-                <td><?= $this->Number->format($iteItem->year) ?></td>
-                <td><?= $this->Number->format($iteItem->decree) ?></td>
-                <td><?= $this->Number->format($iteItem->price) ?></td>
-                <td><?php //$this->Number->format($iteItem->sector_id) ?></td>
-                <td><?= $iteItem->has('ite_budget') ? $this->Html->link($iteItem->ite_budget->value, ['controller' => 'IteBudgets', 'action' => 'edit', $iteItem->ite_budget->id]) : '' ?></td>
-                <td><?= $iteItem->has('ite_acquisition_type') ? $this->Html->link($iteItem->ite_acquisition_type->value, ['controller' => 'IteAcquisitionTypes', 'action' => 'view', $iteItem->ite_acquisition_type->value]) : '' ?></td>
-                <td><?= $iteItem->has('ite_status') ? $this->Html->link($iteItem->ite_status->value, ['controller' => 'IteStatuses', 'action' => 'view', $iteItem->ite_status->id]) : '' ?></td>
-                <td><?= $iteItem->has('ite_class') ? $this->Html->link($iteItem->ite_class->value, ['controller' => 'IteClasses', 'action' => 'view', $iteItem->ite_class->id]) : '' ?></td>
-                <td><?= $iteItem->has('ite_type') ? $this->Html->link($iteItem->ite_type->value, ['controller' => 'IteTypes', 'action' => 'view', $iteItem->ite_type->id]) : '' ?></td>
-                <td class="actions">
-                    <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span>', array('action' => 'view', $iteItem->id), array('title' => 'Ver', 'escape' => false)); ?>
-                    <?= $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $iteItem->id), array('title' => 'Editar', 'escape' => false)); ?>
-                    <?= $this->Form->postLink('<span class="glyphicon glyphicon-trash"></span>', ['action' => 'delete', $iteItem->id], array('title' => 'eliminar', 'escape' => false,['confirm' => __('Quiere eliminarlo # {0}?', $iteItem->id)])) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-          </tbody>
+          <!-- <table id="example1" class="table table-bordered table-striped"> -->
+          <table ng-table="vm.tableParams" class="table" show-filter="true">
+              <tr ng-repeat="item in $iteItems">
+                  <td title="'Picture'" filter="{ name: 'text'}" sortable="'name'">
+                      {{item.name}}</td>
+                  <td title="'Expediente'" filter="{ age: 'number'}" sortable="'age'">
+                      {{item.age}}</td>
+              </tr>
         </table>
       </div>
       <!-- /.box-body -->
@@ -65,9 +34,9 @@
 
 
   <script>
-  $(function () {
-  $("#example1").DataTable();
-  });
+
+
+
   </script>
     <div class="paginator">
         <ul class="pagination">
