@@ -22,21 +22,3 @@ var mainApp = angular.module("mainApp", ['ngRoute','ngTable']);
     //     }) */;
 }
 );
-
-mainApp.controller('getInd', function($scope,$http){
-
-    // $scope.item = <?php echo json_encode($iteItems) ?>;
-
-    $scope.getItems = function() {
-
-      $http
-      // .get("<?php// echo Router::url(array('controller' => 'ItemItems', 'action' => 'getIndexClass')) ?>" + '/' + 1)
-       .get('http://localhost:8081/cake/ite-items/getIndexClass/1')
-       .then(function(response) {
-     $scope.item2 = response;
-     console.log($scope.item2);
- });
-
-
-    };
-  });

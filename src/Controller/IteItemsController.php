@@ -33,19 +33,20 @@ class IteItemsController extends AppController
     public function getIndexClass($id)
     {
           $this->autoRender = false;
-          $iteItems = $this->paginate($this->IteItems->find('all', array(
+          $iteItems = $this->IteItems->find('all', array(
           'conditions' => ['IteItems.item_class_id' => $id],
-          'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes'])));
+          'limit'=>8, //SI CONTIENE MUCHOS ITEMS LA VARIABLE $IteItems SE HACE MUY GRANDE POR LO CUAL DEBEMOS MODIFICAR LA CONFIGURACION DEL PHP.INI
+          'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']));
 // pr($iteItems);
-// $this->set('iteItems', $iteItems);
- $a = json_encode($iteItems);
-$this->set(array(
-        'data' => $a,
-         '_serialize' => array('data')
-    ));
-        // $this->set(compact('iteItems'));
-        // $this->set('_serialize', ['iteItems']);
-
+// $iteItems->toArray()
+      $a = array();
+      $a = $iteItems->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
+      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
+        // pr($a);
+      $this->set(compact(array(
+          'data' => $a,
+           '_serialize' => array('data')
+      )));
     }
 
     /**

@@ -2,6 +2,8 @@
 /**
   * @var \App\View\AppView $this
   */
+  use Cake\Routing\Router
+
 ?>
 <!-- <div class="iteItems index large-9 medium-8 columns content"> -->
 <div class="content" data-ng-controller="getInd">
@@ -15,11 +17,11 @@
         <div class="box-body">
           <!-- <table id="example1" class="table table-bordered table-striped"> -->
           <table ng-table="vm.tableParams" class="table" show-filter="true">
-              <tr ng-repeat="item in $iteItems">
-                  <td title="'Picture'" filter="{ name: 'text'}" sortable="'name'">
-                      {{item.name}}</td>
-                  <td title="'Expediente'" filter="{ age: 'number'}" sortable="'age'">
-                      {{item.age}}</td>
+              <tr ng-repeat="a in item">
+                  <td title="'Picture'" filter="{ picture: 'text'}" sortable="'picture'">
+                      {{a.picture}}</td>
+                  <td title="'Expediente'" filter="{ file: 'number'}" sortable="'file'">
+                      {{a.file}}</td>
               </tr>
         </table>
       </div>
@@ -33,11 +35,27 @@
 </div>
 
 
-  <script>
+<script type="text/javascript">
+mainApp.controller('getInd', function($scope,$http){
 
+    $scope.item = <?php echo json_encode($iteItems) ?>;
+    $scope.item2 = [];
+    $scope.getItems = function() {
 
+      $http({
+      method: 'get',
+      url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getIndexClass')) ?>" + '/' + '1'
+      }).then(function (response) {
+          debugger;
+          $scope.item2 = response.data;
+        console.log(response.data);
+      },function (error){
+          console.log(error);
+      });
+    };
 
-  </script>
+});
+</script>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('primero')) ?>
