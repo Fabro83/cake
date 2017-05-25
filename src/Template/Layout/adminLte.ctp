@@ -31,8 +31,8 @@
 
     <!-- <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
     <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script> -->
-    <?php echo $this->Html->script('AdminLTE./ng-table/bundles/ng-table'); ?>
-    <?php echo $this->Html->css('AdminLTE./ng-table/bundles/ng-table'); ?>
+    <?php echo $this->Html->script('AdminLTE./angular-smart-table/dist/smart-table'); ?>
+    <?php //echo $this->Html->css('AdminLTE./angular-smart-table/src/smart-table.module'); ?>
     <!-- Ionicons -->
     <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
     <!-- Theme style -->

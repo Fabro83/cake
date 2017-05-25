@@ -1,4 +1,4 @@
-var mainApp = angular.module("mainApp", ['ngRoute','ngTable']);
+var mainApp = angular.module("mainApp", ['ngRoute','smart-table']);
  mainApp.config(function($routeProvider) {
     // $routeProvider
     //     .when('/login', {
