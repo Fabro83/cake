@@ -38,7 +38,7 @@
           	</thead>
           	<tbody>    <!--{{item}}-->
           	<tr ng-repeat="row in item">
-          		<td>{{row.picture}}</td>
+          		<td><img ng-src="/cake/img/{{row.picture}}"  alt=""></td>
           		<td>{{row.file_id}}</td>
           		<td>{{row.year}}</td> <!--{{row.file_id | date}}-->
           		<!-- <td>{{row.file_id | currency}}</td> -->
@@ -60,6 +60,7 @@
                         <h4 class="modal-title">Cambiar valores de la variable</h4>
                       </div>
                       <div class="modal-body">
+                        <img ng-src="/cake/img/{{row.picture}}"  alt="">
                         <input type="number" class="form-control" id="file_id" ng-model="row.file_id">
                         <input type="number" class="form-control" id="year" ng-model="row.year">
                       </div>
