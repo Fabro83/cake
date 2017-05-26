@@ -25,9 +25,9 @@ class IteItemsController extends AppController
             'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']
         ];
         $iteItems = $this->paginate($this->IteItems);
-
-        $this->set(compact('iteItems'));
-        $this->set('_serialize', ['iteItems']);
+        $iteBudgets = $this->IteItems->IteBudgets->find('all', ['limit' => 200]);
+        $this->set(compact('iteItems', 'iteBudgets'));
+        $this->set('_serialize', ['iteItems', 'iteBudgets']);
     }
 
     public function getIndexClass($id)

@@ -36,7 +36,7 @@
             <tbody>    <!--{{item}}-->
 
             <tr ng-repeat="row in item">
-                <td><img ng-src="/cake/img/{{row.picture}}"  alt=""></td>
+                <td><img width="70px" ng-src="/cake/img/{{row.picture}}"  alt=""></td>
                 <td>{{row.file_id}}</td>
                 <td>{{row.year}}</td>
                 <td>{{row.decree}}</td>
@@ -68,7 +68,9 @@
                                 <input type="number" class="form-control" id="year" ng-model="row.year">
                                 <input type="number" class="form-control" id="decree" ng-model="row.decree">
                                 <input type="number" class="form-control" id="price" ng-model="row.price">
-                                <input  class="form-control" id="ite_budget.value" ng-model="row.ite_budget.value">
+                                <select name="repeatSelect" id="repeatSelect" ng-model="budget">
+                                    <option ng-repeat="option in budgetList" value="{{option.id}}">{{option.value}}</option>
+                                </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -97,6 +99,8 @@
 mainApp.controller('getInd', function($scope,$http){
 
     $scope.item = <?php echo json_encode($iteItems) ?>;
+    $scope.budgetList = <?php echo json_encode($iteBudgets) ?>;
+    $scope.budget = null;
     $scope.items = [];
     $scope.getItems = function() {
 
