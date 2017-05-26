@@ -7,7 +7,7 @@
 ?>
 <!-- <div class="iteItems index large-9 medium-8 columns content"> -->
 <div class="content" data-ng-controller="getInd">
-  <div class="row" ng-init="getItems()">
+  <div class="row" >
     <div class="col-xs-12">
       <div class="box">
         <!-- /.box-header -->
@@ -63,18 +63,38 @@
                                 <h4 class="modal-title">Cambiar valores de la variable</h4>
                             </div>
                             <div class="modal-body">
-                                <img ng-src="/cake/img/{{row.picture}}"  alt="">
-                                <input type="number" class="form-control" id="file_id" ng-model="row.file_id">
-                                <input type="number" class="form-control" id="year" ng-model="row.year">
-                                <input type="number" class="form-control" id="decree" ng-model="row.decree">
-                                <input type="number" class="form-control" id="price" ng-model="row.price">
-                                <select name="repeatSelect" id="repeatSelect" ng-model="budget">
-                                    <option ng-repeat="option in budgetList" value="{{option.id}}">{{option.value}}</option>
+                              <form method="post" accept-charset="utf-8" role="form" class="ng-pristine ng-valid">
+                                <img class="col-xs-7" ng-src="/cake/img/{{row.picture}}"  alt="">
+                                <label class="col-xs-6 control-label" for="inputSuccess">N° expediente</label>
+                                <input type="number" class="col-xs-6 form-control" id="file_id" ng-model="row.file_id">
+                                <label class="col-xs-6 control-label" for="inputSuccess">Año</label>
+                                <input type="number" class="col-xs-6 form-control" id="year" ng-model="row.year">
+                                <label class="col-xs-6 control-label" for="inputSuccess">Decreto</label>
+                                <input type="number" class="col-xs-6 form-control" id="decree" ng-model="row.decree">
+                                <label class="col-xs-6 control-label" for="inputSuccess">Precio</label>
+                                <input type="number" class="col-xs-6 form-control" id="price" ng-model="row.price">
+                                <label class="col-xs-6 control-label" for="inputSuccess">Comentario</label>
+                                <input type="text" class="col-xs-6 form-control" id="comment" ng-model="row.comment">
+                                <select class="col-xs-3" name="repeatSelect" id="repeatSelect" ng-model="row.budget_id">
+                                    <option ng-repeat="option in budgetList"  value="{{option.id}}">{{option.value}}</option>
                                 </select>
+                                <select class="col-xs-3" name="repeatSelect" id="repeatSelect" ng-model="row.acquisition_type_id">
+                                    <option ng-repeat="option in acquisitionList" value="{{option.id}}">{{option.value}}</option>
+                                </select>
+                                <select class="col-xs-2" name="repeatSelect" id="repeatSelect" ng-model="row.status_id">
+                                    <option ng-repeat="option in statusList" value="{{option.id}}">{{option.value}}</option>
+                                </select>
+                                <select class="col-xs-2" name="repeatSelect" id="repeatSelect" ng-model="row.item_class_id">
+                                    <option ng-repeat="option in classList" value="{{option.id}}">{{option.value}}</option>
+                                </select>
+                                <select class="col-xs-2" name="repeatSelect" id="repeatSelect" ng-model="row.item_type_id">
+                                    <option ng-repeat="option in typeList" value="{{option.id}}">{{option.value}}</option>
+                                </select>
+                              </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" ng-click="saved(row)" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="col-xs-4 btn btn-default" data-dismiss="modal">Salir</button>
+                                <button type="button" class="col-xs-4 btn btn-primary" ng-click="saved(row)" >Guardar cambios</button>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -99,8 +119,22 @@
 mainApp.controller('getInd', function($scope,$http){
 
     $scope.item = <?php echo json_encode($iteItems) ?>;
+    console.log($scope.item);
     $scope.budgetList = <?php echo json_encode($iteBudgets) ?>;
-    $scope.budget = null;
+    $scope.acquisitionList = <?php echo json_encode($iteAcquisitionTypes) ?>;
+    console.log($scope.acquisitionList);
+    $scope.statusList = <?php echo json_encode($iteStatuses) ?>;
+    console.log($scope.statusList);
+    $scope.classList = <?php echo json_encode($iteClasses) ?>;
+    $scope.typeList = <?php echo json_encode($iteTypes) ?>;
+    $scope.iteItem = [];
+    $scope.iteItem = {id:"",file_id:"",year:"",comment:"",price:"",picture:"",sector_id:"",budget_id:"", acquisition_type_id:"",status_id:"",item_class_id:"",item_type_id:""}
+    console.log($scope.iteItem);
+    // $scope.budget_id = null;
+    // $scope.acquisition_type_id = null;
+    // $scope.status_id = null;
+    // $scope.item_class_id = null;
+    // $scope.item_type_id = null;
     $scope.items = [];
     $scope.getItems = function() {
 
@@ -131,18 +165,39 @@ mainApp.controller('getInd', function($scope,$http){
     }
     $scope.saved = function (row){
       //Hacer que la vista del edit, se muestre en el modal
-      debugger;
+      // debugger;
+      $scope.getEditItems();
+      $scope.iteItem = [];
+      $scope.itemEdit = {id:row.id,file_id:row.file_id,year:row.year,comment:row.comment,price:row.price,picture:row.picture,sector_id:row.sector_id,budget_id:row.budget_id, acquisition_type_id:row.acquisition_type_id,status_id:row.status_id,item_class_id:row.item_class_id,item_type_id:row.item_type_id};
+      // $scope.iteItem = {id:row.id,file_id:row.file_id,year:row.year,comment:row.comment,price:row.price,picture:row.picture,sector_id:row.sector_id,budget_id:row.budget_id, acquisition_type_id:row.acquisition_type_id,status_id:row.status_id,item_class_id:row.item_class_id,item_type_id:row.item_type_id}
+      console.log($scope.itemEdit);
+
       $http({
             method: 'POST',
             url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'edit')) ?>" + '/' + row.id ,
-            data: row,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            data: $scope.itemEdit,
         }).then(function (data, status, headers, config) {
+          // debugger;
             // handle success things
         }).error(function (data, status, headers, config) {
+          // debugger;
             // handle error things
         });
     }
+    $scope.getEditItems = function() {
+      // debugger;
+      $http({
+      method: 'get',
+      url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getEditItem')) ?>" + '/' + '1'
+      }).then(function (response) {
+          // debugger;
+          $scope.itemEdit = response.data;
+        console.log(response.data);
+      },function (error){
+          console.log(error);
+      });
+    };
+
 });
 
 </script>

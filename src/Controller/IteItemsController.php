@@ -26,8 +26,12 @@ class IteItemsController extends AppController
         ];
         $iteItems = $this->paginate($this->IteItems);
         $iteBudgets = $this->IteItems->IteBudgets->find('all', ['limit' => 200]);
-        $this->set(compact('iteItems', 'iteBudgets'));
-        $this->set('_serialize', ['iteItems', 'iteBudgets']);
+        $iteAcquisitionTypes = $this->IteItems->IteAcquisitionTypes->find('all', ['limit' => 200]);
+        $iteStatuses = $this->IteItems->IteStatuses->find('all', ['limit' => 200]);
+        $iteClasses = $this->IteItems->IteClasses->find('all', ['limit' => 200]);
+        $iteTypes = $this->IteItems->IteTypes->find('all', ['limit' => 200]);
+        $this->set(compact('iteItems', 'iteBudgets','iteAcquisitionTypes','iteStatuses','iteClasses','iteTypes'));
+        $this->set('_serialize', ['iteItems', 'iteBudgets','iteAcquisitionTypes','iteStatuses','iteClasses','iteTypes']);
     }
 
     public function getIndexClass($id)
@@ -41,6 +45,21 @@ class IteItemsController extends AppController
 // $iteItems->toArray()
       $a = array();
       $a = $iteItems->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
+      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
+        // pr($a);
+      $this->set(compact(array(
+          'data' => $a,
+           '_serialize' => array('data')
+      )));
+    }
+    public function getEditItem($id)
+    {
+      $this->autoRender = false;
+      $iteItem = $this->IteItems->get($id, [
+          'contain' => []
+      ]);
+      $a = array();
+      $a = $iteItem->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
       $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
         // pr($a);
       $this->set(compact(array(
@@ -75,7 +94,6 @@ class IteItemsController extends AppController
     {
         $iteItem = $this->IteItems->newEntity();
         if ($this->request->is('post')) {
-          pr($this->request->data);
             $iteItem = $this->IteItems->patchEntity($iteItem, $this->request->getData());
             if ($this->IteItems->save($iteItem)) {
                 $this->Flash->success(__('The ite item has been saved.'));
@@ -83,6 +101,7 @@ class IteItemsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The ite item could not be saved. Please, try again.'));
+
         }
         // $files = $this->IteItems->Files->find('list', ['limit' => 200]);
         $iteBudgets = $this->IteItems->IteBudgets->find('list', ['limit' => 200]);
@@ -106,14 +125,25 @@ class IteItemsController extends AppController
         $iteItem = $this->IteItems->get($id, [
             'contain' => []
         ]);
+        // pr($iteItem);
         if ($this->request->is(['patch', 'post', 'put'])) {
+          $this->autoRender = false;
+          // pr($this->request->getData());
             $iteItem = $this->IteItems->patchEntity($iteItem, $this->request->getData());
+            // pr($iteItem);
             if ($this->IteItems->save($iteItem)) {
-                $this->Flash->success(__('The ite item has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                // $this->Flash->success(__('The ite item has been saved.'));
+                $this->set(compact(array(
+                    'data' => "El registro se actualizo correctamente",
+                     '_serialize' => array('data')
+                )));
+                // return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The ite item could not be saved. Please, try again.'));
+            // $this->Flash->error(__('The ite item could not be saved. Please, try again.'));
+            $this->set(compact(array(
+                'data' => "Hubo un problema, no pudimos actualizar el registro, intente nuevamente",
+                 '_serialize' => array('data')
+            )));
         }
         // $files = $this->IteItems->Files->find('list', ['limit' => 200]);
         $iteBudgets = $this->IteItems->IteBudgets->find('list', ['limit' => 200]);
