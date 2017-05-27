@@ -38,21 +38,25 @@ class IteItemsController extends AppController
 
     public function getIndexClass($id)
     {
-          $this->autoRender = false;
-          $iteItems = $this->IteItems->find('all', array(
-          'conditions' => ['IteItems.item_class_id' => $id],
-          'limit'=>8, //SI CONTIENE MUCHOS ITEMS LA VARIABLE $IteItems SE HACE MUY GRANDE POR LO CUAL DEBEMOS MODIFICAR LA CONFIGURACION DEL PHP.INI
-          'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']));
-// pr($iteItems);
-// $iteItems->toArray()
-      $a = array();
-      $a = $iteItems->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
-      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
-        // pr($a);
-      $this->set(compact(array(
-          'data' => $a,
-           '_serialize' => array('data')
-      )));
+        $this->autoRender = false;
+        // $iteItems = $this->IteItems->find('all', array(
+        // 'conditions' => ['IteItems.item_class_id' => $id],
+        // 'limit'=>8, //SI CONTIENE MUCHOS ITEMS LA VARIABLE $IteItems SE HACE MUY GRANDE POR LO CUAL DEBEMOS MODIFICAR LA CONFIGURACION DEL PHP.INI
+        // 'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']));
+        $this->paginate = [
+            'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes'],
+            'conditions'=> ['IteItems.status_id'=> 1,'IteItems.item_class_id' => $id],//SOLO MUESTRA LOS QUE ESTAN DADO DE ALTA
+            'limit'=> 8
+        ];
+        $iteItems = $this->paginate($this->IteItems);
+        $a = array();
+        $a = $iteItems->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
+        $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
+          // pr($a);
+        $this->set(compact(array(
+            'data' => $a,
+             '_serialize' => array('data')
+        )));
     }
     public function getEditItem($id)
     {
@@ -69,14 +73,6 @@ class IteItemsController extends AppController
            '_serialize' => array('data')
       )));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Ite Item id.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $iteItem = $this->IteItems->get($id, [
@@ -86,12 +82,6 @@ class IteItemsController extends AppController
         $this->set('iteItem', $iteItem);
         $this->set('_serialize', ['iteItem']);
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $iteItem = $this->IteItems->newEntity();
@@ -114,23 +104,13 @@ class IteItemsController extends AppController
         $this->set(compact('iteItem', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
         $this->set('_serialize', ['iteItem']);
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Ite Item id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $iteItem = $this->IteItems->get($id, [
             'contain' => []
         ]);
-        // pr($iteItem);
         if ($this->request->is(['patch', 'post', 'put'])) {
-          $this->autoRender = false;
-          // pr($this->request->getData());
+            $this->autoRender = false;
             $iteItem = $this->IteItems->patchEntity($iteItem, $this->request->getData());
             // pr($iteItem);
             if ($this->IteItems->save($iteItem)) {
@@ -139,9 +119,7 @@ class IteItemsController extends AppController
                     'data' => "El registro se actualizo correctamente",
                      '_serialize' => array('data')
                 )));
-                // return $this->redirect(['action' => 'index']);
             }
-            // $this->Flash->error(__('The ite item could not be saved. Please, try again.'));
             $this->set(compact(array(
                 'data' => "Hubo un problema, no pudimos actualizar el registro, intente nuevamente",
                  '_serialize' => array('data')
@@ -156,14 +134,6 @@ class IteItemsController extends AppController
         $this->set(compact('iteItem', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
         $this->set('_serialize', ['iteItem']);
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Ite Item id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         // $this->request->allowMethod(['post', 'delete']);
@@ -177,10 +147,7 @@ class IteItemsController extends AppController
 
           }
         }else{
-          // pr($iteItem);
         }
-
-        // return $this->redirect(['action' => 'index']);
     }
     public function upload (){
       $carpetaAdjunta="imagenes_/";
