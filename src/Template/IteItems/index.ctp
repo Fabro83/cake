@@ -46,7 +46,7 @@
             <tbody>    <!--{{item}}-->
 
             <tr ng-repeat="row in item">
-                <td><img width="70px" ng-src="/cake/img/{{row.picture}}"  alt=""></td>
+                <td><img width="60px" ng-src="/cake/img/{{row.picture}}"  class="img-circle" alt=""></td>
                 <td>{{row.file_id}}</td>
                 <td>{{row.year}}</td>
                 <td>{{row.decree}}</td>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" accept-charset="utf-8" role="form" class="ng-pristine ng-valid">
-                                <img class="col-xs-7" ng-src="/cake/img/{{row.picture}}"  alt="">
+                                <img class="col-xs-7" ng-src="/cake/img/{{row.picture}}" class="img-circle" alt="">
                                 <label class="col-xs-6 control-label" for="inputSuccess">N° expediente</label>
                                 <input type="number" class="col-xs-6 form-control" id="file_id" ng-model="row.file_id">
                                 <label class="col-xs-6 control-label" for="inputSuccess">Año</label>
