@@ -22,7 +22,9 @@ class IteItemsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes']
+            'contain' => ['IteBudgets', 'IteAcquisitionTypes', 'IteStatuses', 'IteClasses', 'IteTypes'],
+            'conditions'=> ['IteItems.status_id'=> 1],//SOLO MUESTRA LOS QUE ESTAN DADO DE ALTA
+            'limit'=> 100
         ];
         $iteItems = $this->paginate($this->IteItems);
         $iteBudgets = $this->IteItems->IteBudgets->find('all', ['limit' => 200]);
@@ -164,15 +166,21 @@ class IteItemsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $iteItem = $this->IteItems->get($id);
-        if ($this->IteItems->delete($iteItem)) {
-            $this->Flash->success(__('The ite item has been deleted.'));
-        } else {
-            $this->Flash->error(__('The ite item could not be deleted. Please, try again.'));
+        // $this->request->allowMethod(['post', 'delete']);
+        $iteItem = $this->IteItems->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['get'])){
+          $this->autoRender = false;
+          $iteItem->status_id = 2;
+          if ($this->IteItems->save($iteItem)) {
+
+          }
+        }else{
+          // pr($iteItem);
         }
 
-        return $this->redirect(['action' => 'index']);
+        // return $this->redirect(['action' => 'index']);
     }
     public function upload (){
       $carpetaAdjunta="imagenes_/";

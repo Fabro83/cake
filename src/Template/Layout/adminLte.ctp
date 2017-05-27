@@ -27,7 +27,7 @@
     <?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
     <?php //echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
     <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
-    <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
+    <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app','bootstrap-notify')); ?>
 
     <!-- <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
     <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script> -->

@@ -108,7 +108,7 @@ class IteItemsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        // $rules->add($rules->existsIn(['file_id'], 'Files'));
+        // $rules->add($rules->existsIn(['file_id'], 'Files'));//ESTO CAMBIAR CUANDO FUNCIONE EXPEDIENTE
         $rules->add($rules->existsIn(['budget_id'], 'IteBudgets'));
         $rules->add($rules->existsIn(['acquisition_type_id'], 'IteAcquisitionTypes'));
         $rules->add($rules->existsIn(['status_id'], 'IteStatuses'));
