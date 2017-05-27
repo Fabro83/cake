@@ -21,6 +21,17 @@
     <div class="col-xs-12">
       <div class="box">
         <!-- /.box-header -->
+        <header>
+          <div>
+              <nav class="navbar navbar-default">
+                  <ul class="nav navbar-nav">
+                      <li ng-repeat="class in classList">
+                          <a href="" ng-click="classClicked(class.id)">{{class.value}}</a>
+                      </li>
+                  </ul>
+              </nav>
+          </div>
+        </header>
         <div class="box-body">
           <!-- <table id="example1" class="table table-bordered table-striped"> -->
           <table st-table="item" class="table table-striped">
@@ -128,19 +139,18 @@
 mainApp.controller('getInd', function($scope,$http){
 
     $scope.item = <?php echo json_encode($iteItems) ?>;
-    console.log($scope.item);
     $scope.budgetList = <?php echo json_encode($iteBudgets) ?>;
     $scope.acquisitionList = <?php echo json_encode($iteAcquisitionTypes) ?>;
-    console.log($scope.acquisitionList);
     $scope.statusList = <?php echo json_encode($iteStatuses) ?>;
-    console.log($scope.statusList);
     $scope.classList = <?php echo json_encode($iteClasses) ?>;
     $scope.typeList = <?php echo json_encode($iteTypes) ?>;
     $scope.iteItem = [];
+
     $scope.iteItem = {id:"",file_id:"",year:"",comment:"",price:"",picture:"",sector_id:"",budget_id:"", acquisition_type_id:"",status_id:"",item_class_id:"",item_type_id:""}
     console.log($scope.iteItem);
 
     $scope.items = [];
+
     $scope.getItems = function() {
 
       $http({
@@ -154,6 +164,7 @@ mainApp.controller('getInd', function($scope,$http){
           console.log(error);
       });
     };
+
     $scope.deleteItem = function(id) {
       var notify = $.notify('<strong>Dando de baja al items</strong> No cierre la página...', {
     	allow_dismiss: false,
@@ -172,6 +183,7 @@ mainApp.controller('getInd', function($scope,$http){
         }, 500);
       });
     };
+
     $scope.removeRow = function removeRow(row) {
       // debugger;
         var index = $scope.item.indexOf(row);
@@ -180,6 +192,7 @@ mainApp.controller('getInd', function($scope,$http){
             $scope.deleteItem(row.id);
         }
     }
+
     $scope.OpenModal = function (index){
       // debugger;
       $('#myModal'+index).modal()
@@ -187,6 +200,7 @@ mainApp.controller('getInd', function($scope,$http){
         $('#file_id').focus()
       })
     }
+
     $scope.saved = function (row){
       //Hacer que la vista del edit, se muestre en el modal
       // debugger;
