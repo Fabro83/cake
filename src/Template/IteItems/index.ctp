@@ -5,6 +5,7 @@
   use Cake\Routing\Router;
 
 ?>
+<?= $this->Html->css('bootstrap/css/app') ?>
 <style media="screen">
 [data-notify="progressbar"] {
 	margin-bottom: 0px;
@@ -16,21 +17,20 @@
 }
 </style>
 <!-- <div class="iteItems index large-9 medium-8 columns content"> -->
+
 <div class="content" data-ng-controller="getInd">
   <div class="row" >
     <div class="col-xs-12">
       <div class="box">
         <!-- /.box-header -->
-        <header>
-          <div>
+        <header class="navbar">
               <nav class="navbar navbar-default">
-                  <ul class="nav navbar-nav">
+                  <ul class="nav nav-center">
                       <li ng-repeat="class in classList">
-                          <a href="" ng-click="getItems(class.id)">{{class.value}}</a>
+                          <a href="" ng-click="classClicked(class.id)">{{class.value}}</a>
                       </li>
                   </ul>
               </nav>
-          </div>
         </header>
         <div class="box-body">
           <!-- <table id="example1" class="table table-bordered table-striped"> -->
@@ -137,6 +137,7 @@
 
 <script type="text/javascript">
 mainApp.controller('getInd', function($scope,$http){
+
     $scope.item = <?php echo json_encode($iteItems) ?>;
     $scope.budgetList = <?php echo json_encode($iteBudgets) ?>;
     $scope.acquisitionList = <?php echo json_encode($iteAcquisitionTypes) ?>;
@@ -144,28 +145,32 @@ mainApp.controller('getInd', function($scope,$http){
     $scope.classList = <?php echo json_encode($iteClasses) ?>;
     $scope.typeList = <?php echo json_encode($iteTypes) ?>;
     $scope.iteItem = [];
+
     $scope.iteItem = {id:"",file_id:"",year:"",comment:"",price:"",picture:"",sector_id:"",budget_id:"", acquisition_type_id:"",status_id:"",item_class_id:"",item_type_id:""}
     console.log($scope.iteItem);
 
     $scope.items = [];
 
-    $scope.getItems = function(id) {
+    var cla = 2;
+    $scope.getItems = function() {
+        debugger;
       $http({
       method: 'get',
-      url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getIndexClass')) ?>" + '/' + id
+      url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getIndexClass')) ?>" + '/' + cla
       }).then(function (response) {
           // debugger;
-          $scope.item = response.data;
+          $scope.items = response.data;
         console.log(response.data);
       },function (error){
           console.log(error);
       });
     };
+
     $scope.deleteItem = function(id) {
       var notify = $.notify('<strong>Dando de baja al items</strong> No cierre la página...', {
     	allow_dismiss: false,
     	showProgressbar: true
-      });
+    });
       $http({
       method: 'get',
       url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'delete')) ?>" + '/' + id
@@ -179,6 +184,7 @@ mainApp.controller('getInd', function($scope,$http){
         }, 500);
       });
     };
+
     $scope.removeRow = function removeRow(row) {
       // debugger;
         var index = $scope.item.indexOf(row);
@@ -187,6 +193,7 @@ mainApp.controller('getInd', function($scope,$http){
             $scope.deleteItem(row.id);
         }
     }
+
     $scope.OpenModal = function (index){
       // debugger;
       $('#myModal'+index).modal()
@@ -194,11 +201,15 @@ mainApp.controller('getInd', function($scope,$http){
         $('#file_id').focus()
       })
     }
+
     $scope.saved = function (row){
+      //Hacer que la vista del edit, se muestre en el modal
+      // debugger;
       var notify = $.notify('<strong>Guardando</strong> No cierre la página...', {
     	allow_dismiss: false,
     	showProgressbar: true
-      });
+    });
+    //TODOS ESTOS IF LOS HAGO PARA VALIDAD UNO POR UNO, POR SI CADA DATO TIENE UNA CONDICION DIFERENTE
       var bandera = 1;
       if(row.file_id == null){
         bandera = 0;
@@ -252,10 +263,13 @@ mainApp.controller('getInd', function($scope,$http){
             url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'edit')) ?>" + '/' + row.id ,
             data: $scope.itemEdit,
         }).then(function (data, status, headers, config) {
+          // debugger;
             setTimeout(function() {
             	notify.update({'type': 'success', 'message': '<strong>Exitoso</strong> El item fue guardado exitosamente!', 'progress': 25});
             }, 2500);
         }).error(function (data, status, headers, config) {
+          // debugger;
+            // handle error things
             setTimeout(function() {
             	notify.update({'type': 'danger', 'message': '<strong>Error</strong> El item no se guardo!', 'progress': 50});
             }, 1000);
@@ -267,10 +281,11 @@ mainApp.controller('getInd', function($scope,$http){
       }
     }
     $scope.getEditItems = function(id) {
+      // debugger;
       var notify = $.notify('<strong>Verificando</strong> No cierre la página...', {
     	allow_dismiss: false,
     	showProgressbar: true
-      });
+    });
       $http({
       method: 'get',
       url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getEditItem')) ?>" + '/' + id

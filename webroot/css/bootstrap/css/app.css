@@ -1,0 +1,44 @@
+.nav.nav-center {
+  float:none;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+
+.site-navigation ul {
+  background: #eee;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  /**
+   * Flexbox properties
+   */
+
+}
+
+.site-navigation a {
+  color: #333;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  padding: 3rem;
+  height: 80px;
+  font-size: 125%;
+}
+
+.site-navigation a:hover {
+  background: #d4d4d4;
+}
+
+.site-header
+{
+  height: 145px;
+  background: linear-gradient(-90deg, #F0F0F0 , #C8C8C8);
+  width: 84%;
+  color: #FFF;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
