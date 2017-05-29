@@ -144,22 +144,18 @@ mainApp.controller('getInd', function($scope,$http){
     $scope.statusList = <?php echo json_encode($iteStatuses) ?>;
     $scope.classList = <?php echo json_encode($iteClasses) ?>;
     $scope.typeList = <?php echo json_encode($iteTypes) ?>;
-    $scope.iteItem = [];
 
-    $scope.iteItem = {id:"",file_id:"",year:"",comment:"",price:"",picture:"",sector_id:"",budget_id:"", acquisition_type_id:"",status_id:"",item_class_id:"",item_type_id:""}
-    console.log($scope.iteItem);
-
-    $scope.items = [];
 
     var cla = 2;
-    $scope.getItems = function() {
+
+    $scope.classClicked = function(id) {
         debugger;
       $http({
       method: 'get',
-      url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getIndexClass')) ?>" + '/' + cla
+      url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'getIndexClass')) ?>" + '/' + id
       }).then(function (response) {
           // debugger;
-          $scope.items = response.data;
+          $scope.item = response.data;
         console.log(response.data);
       },function (error){
           console.log(error);
@@ -253,9 +249,9 @@ mainApp.controller('getInd', function($scope,$http){
       if(bandera == 1){
 
       $scope.getEditItems(row.id);//ESTA FUNCION VA AL CONTROLADOR DEL ITEITEMS Y BUSCA EL ITEM CON LA ID
-      $scope.iteItem = [];
+
       $scope.itemEdit = {id:row.id,file_id:row.file_id,year:row.year,decree:row.decree,comment:row.comment,price:row.price,picture:row.picture,sector_id:row.sector_id,budget_id:row.budget_id, acquisition_type_id:row.acquisition_type_id,status_id:row.status_id,item_class_id:row.item_class_id,item_type_id:row.item_type_id};
-      // $scope.iteItem = {id:row.id,file_id:row.file_id,year:row.year,comment:row.comment,price:row.price,picture:row.picture,sector_id:row.sector_id,budget_id:row.budget_id, acquisition_type_id:row.acquisition_type_id,status_id:row.status_id,item_class_id:row.item_class_id,item_type_id:row.item_type_id}
+
       console.log($scope.itemEdit);
 
       $http({
@@ -280,6 +276,7 @@ mainApp.controller('getInd', function($scope,$http){
         }, 1000);
       }
     }
+
     $scope.getEditItems = function(id) {
       // debugger;
       var notify = $.notify('<strong>Verificando</strong> No cierre la página...', {
