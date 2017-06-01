@@ -99,8 +99,8 @@ class IteItemsController extends AppController
         $iteBudgets = $this->IteItems->IteBudgets->find('list', ['limit' => 200]);
         $iteAcquisitionTypes = $this->IteItems->IteAcquisitionTypes->find('list', ['limit' => 200]);
         $iteStatuses = $this->IteItems->IteStatuses->find('list', ['limit' => 200]);
-        $iteClasses = $this->IteItems->IteClasses->find('list', ['limit' => 200]);
-        $iteTypes = $this->IteItems->IteTypes->find('list', ['limit' => 200]);
+        $iteClasses = $this->IteItems->IteClasses->find('all', ['limit' => 200]);
+        $iteTypes = $this->IteItems->IteTypes->find('all', ['limit' => 200]);
         $this->set(compact('iteItem', 'iteBudgets', 'iteAcquisitionTypes', 'iteStatuses', 'iteClasses', 'iteTypes'));
         $this->set('_serialize', ['iteItem']);
     }
