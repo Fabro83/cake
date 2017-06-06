@@ -124,7 +124,7 @@
                         <option ng-repeat="option in ClassList"  value="{{option.id}}">{{option.value}}</option>
                     </select>
                     <select class="col-xs-3" name="repeatSelect" id="repeatSelect" ng-model="var_item_type_id">
-                        <option ng-repeat="option in TypeIteList"  value="{{option.id}}">{{option.value}}</option>
+                        <option ng-repeat="option in TypeIteList_"  value="{{option.id}}">{{option.value}}</option>
                     </select>
                   </form>
                 </div>
@@ -149,6 +149,7 @@
 mainApp.controller('AddItem', function($scope,$http){
 $scope.item = [];
 //Iniciando las varibales del modal
+$scope.TypeIteList_ = [];
 $scope.var_comment = "";
 $scope.var_price = "";
 $scope.var_sector_id = "";
@@ -156,16 +157,40 @@ $scope.var_item_class_id = "";
 $scope.var_item_type_id = "";
 //Fin
 $scope.ClassList = <?php echo json_encode ($iteClasses) ?>;
-console.log($scope.ClassList);
 $scope.TypeIteList = <?php echo json_encode ($iteTypes) ?>;
 console.log($scope.TypeIteList);
 
 $scope.OpenModal = function (){
-  debugger;
   $('#myModal').modal()
   $('#myModal').on('shown.bs.modal', function () {
     $('#comment').focus()
   })
+}
+$scope.$watch("var_item_class_id", function(newValue, oldValue) {
+  debugger;
+   if (newValue === oldValue) {
+     return;
+   }else{
+     $scope.TypeIteList_ = [];
+     angular.forEach($scope.TypeIteList, function(value, key){
+         if(value.item_class_id == newValue)
+            $scope.TypeIteList_.push(value);
+      });
+   }
+ });
+
+ // $scope.change = function() {
+ //   $scope.persona = {
+ //     nombre: "Lorenzo",
+ //     ape1: "Garcia"
+ //   }
+ // }
+$scope.UpdateTypeList = function (id){
+  debugger;
+  angular.forEach($scope.TypeIteList, function(value, key){
+      if(value.item_class_id == id)
+         $scope.TypeIteList_.push(value);
+   });
 }
 
 // $("#picture").fileinput({
