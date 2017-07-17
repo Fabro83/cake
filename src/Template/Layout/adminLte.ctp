@@ -11,12 +11,6 @@
     <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
     <?php echo $this->Html->css('AdminLTE./bootstrap/css/bootstrap'); ?>
 
-    <?php echo $this->Html->script('AdminLTE./datatables/jquery.dataTables'); ?>
-    <?php echo $this->Html->css('AdminLTE./datatables/jquery.dataTables'); ?>
-
-    <?php echo $this->Html->script('AdminLTE./datatables/dataTables.bootstrap'); ?>
-    <?php echo $this->Html->css('AdminLTE./datatables/dataTables.bootstrap'); ?>
-
     <?php echo $this->Html->script('AdminLTE./datepicker/bootstrap-datepicker'); ?>
     <?php echo $this->Html->css('AdminLTE./datepicker/datepicker3'); ?>
 
@@ -76,6 +70,7 @@
 
         <!-- Left side column. contains the sidebar -->
         <?php echo $this->element('aside-main-sidebar'); ?>
+        
 
         <!-- =============================================== -->
 
