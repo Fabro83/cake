@@ -6,6 +6,7 @@ use Cake\Routing\Router;
 
 ?>
 <?= $this->Html->css('bootstrap/css/app') ?>
+<script type="text/javascript" src="/cake/src/js/itemAng.js"></script>
 <style media="screen">
     [data-notify="progressbar"] {
         margin-bottom: 0px;
@@ -54,7 +55,7 @@ use Cake\Routing\Router;
 </aside>
 
 <!-- <div class="iteItems index large-9 medium-8 columns content"> -->
-<div class="content" data-ng-controller="getInd" ng-init="getItems()">
+<div class="content" data-ng-controller="getInd">
     <div class="row" >
         <div class="col-xs-12">
             <div class="box">
@@ -172,22 +173,10 @@ use Cake\Routing\Router;
 
 
 <script type="text/javascript">
+
+
     mainApp.controller('getInd', function($scope,$http){
 
-        $scope.getItems = function(){
-            $http({
-                method: 'get',
-                url: "<?php echo Router::url(array('controller' => 'IteItems', 'action' => 'test')) ?>"
-            }).
-            then(function (response) {
-                debugger;
-                $scope.item = response.data;
-                console.log(response.data);
-            }, function (err) {
-                //console.log(err);
-                // log error
-            });
-        };
 
         $scope.budgetList = <?php echo json_encode($iteBudgets) ?>;
         $scope.acquisitionList = <?php echo json_encode($iteAcquisitionTypes) ?>;

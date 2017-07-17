@@ -36,7 +36,7 @@ class IteItemsController extends AppController
         $this->set('_serialize', ['iteItems', 'iteBudgets','iteAcquisitionTypes','iteStatuses','iteClasses','iteTypes']);
     }
 
-    public function test()
+    public function getItems()
     {
         $this->autoRender = false;
         $this->paginate = [
@@ -44,13 +44,7 @@ class IteItemsController extends AppController
             'limit'=> 8
         ];
         $iteItems = $this->paginate($this->IteItems);
-        $a = $iteItems->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
-        $a = print_r(json_encode($a));
-        $this->set(compact(array(
-            'data' => $a,
-            '_serialize' => array('data')
-        )));
-        //echo json_encode($iteItems->toArray());
+        echo json_encode($iteItems);
     }
 
     public function getIndexClass($id)
